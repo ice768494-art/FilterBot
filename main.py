@@ -24,7 +24,11 @@ level=logging.INFO,
 logger = logging.getLogger(name)
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
-ADMIN_ID = int(os.environ["ADMIN_ID"])
+ADMIN_IDS = {
+    int(admin_id.strip())
+    for admin_id in os.environ["ADMIN_IDS"].split(",")
+    if admin_id.strip()
+}
 
 DATA_FILE = Path(os.environ.get("DATA_FILE", "data.json"))
 
