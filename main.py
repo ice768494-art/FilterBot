@@ -35,16 +35,18 @@ DATA_FILE = Path(os.environ.get("DATA_FILE", "data.json"))
 ADD_NAME, ADD_LINKS, ADD_POSTER = range(3)
 DELETE_NAME = 3
 
+
 def load_data():
-if not DATA_FILE.exists():
-return {}
+ if not DATA_FILE.exists():
+   return {}
+
 try:
-with DATA_FILE.open("r", encoding="utf-8") as file:
-data = json.load(file)
-return data if isinstance(data, dict) else {}
+    with DATA_FILE.open("r", encoding="utf-8") as file:
+        data = json.load(file)
+        return data if isinstance(data, dict) else {}
 except (json.JSONDecodeError, OSError):
-logger.exception("Could not load database")
-return {}
+    logger.exception("Could not load database")
+    return {}
 
 def save_data(data):
 DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
